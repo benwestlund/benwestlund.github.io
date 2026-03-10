@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ben Westlund</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #1a1714;
+      --ink-light: #5a5550;
+      --paper: #f7f4f0;
+      --paper-dark: #ede9e3;
+      --accent: #8b4513;
+      --accent-muted: #c4956a;
+      --rule: #d8d2c8;
+      --serif: 'Lora', Georgia, serif;
+      --sans: 'DM Sans', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(247,244,240,0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--rule);
+      padding: 0 2.5rem;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 56px;
+    }
+    .nav-name {
+      font-family: var(--serif); font-size: 1rem; font-weight: 500;
+      text-decoration: none; color: var(--ink);
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.75rem; font-weight: 500; letter-spacing: 0.09em;
+      text-transform: uppercase; text-decoration: none; color: var(--ink-light);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* LAYOUT */
+    .wrap {
+      max-width: 860px; margin: 0 auto; padding: 6rem 2.5rem;
+    }
+    .wrap + .wrap { border-top: 1px solid var(--rule); }
+
+    /* HERO */
+    .hero-inner {
+      display: grid; grid-template-columns: 1fr 160px; gap: 3rem; align-items: end;
+      padding-top: 4rem;
+    }
+    .hero-eyebrow {
+      font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--accent-muted); font-weight: 500; margin-bottom: 1.2rem;
+      display: flex; align-items: center; gap: 0.6rem;
+    }
+    .hero-eyebrow::before {
+      content: ''; display: inline-block; width: 28px; height: 1px; background: var(--accent-muted);
+    }
+    h1 {
+      font-family: var(--serif);
+      font-size: clamp(2.8rem, 6vw, 4.4rem);
+      font-weight: 500; line-height: 1.08; letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+    }
+    .hero-sub {
+      font-size: 1.05rem; color: var(--ink-light); max-width: 500px; line-height: 1.8;
+    }
+    .hero-sub strong { color: var(--ink); font-weight: 500; }
+    .hero-photo {
+      width: 150px; height: 190px; background: var(--paper-dark);
+      border: 1px solid var(--rule); display: flex; align-items: center; justify-content: center;
+      font-size: 0.68rem; color: var(--ink-light); text-align: center; line-height: 1.7;
+    }
+    .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2rem; }
+    .btn {
+      display: inline-flex; align-items: center;
+      padding: 0.6rem 1.35rem;
+      font-family: var(--sans); font-size: 0.75rem; font-weight: 500;
+      letter-spacing: 0.07em; text-transform: uppercase; text-decoration: none;
+      border: 1px solid var(--ink); color: var(--ink); background: transparent;
+      cursor: pointer; transition: background 0.18s, color 0.18s;
+    }
+    .btn:hover { background: var(--ink); color: var(--paper); }
+    .btn-ghost { border-color: var(--rule); color: var(--ink-light); }
+    .btn-ghost:hover { background: var(--paper-dark); color: var(--ink); border-color: var(--ink-light); }
+
+    /* SECTION HEADER */
+    .sec-head { margin-bottom: 3rem; }
+    .sec-label {
+      font-size: 0.68rem; letter-spacing: 0.17em; text-transform: uppercase;
+      color: var(--accent-muted); font-weight: 500;
+      display: flex; align-items: center; gap: 0.55rem; margin-bottom: 0.75rem;
+    }
+    .sec-label::before { content: ''; display: inline-block; width: 18px; height: 1px; background: var(--accent-muted); }
+    h2 {
+      font-family: var(--serif); font-size: clamp(1.75rem, 3.5vw, 2.3rem);
+      font-weight: 500; letter-spacing: -0.02em; line-height: 1.2;
+    }
+    .sec-desc { margin-top: 0.7rem; color: var(--ink-light); font-size: 0.95rem; max-width: 500px; }
+
+    /* ABOUT */
+    .about-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 4rem; }
+    .about-text p { color: var(--ink-light); font-size: 0.97rem; margin-bottom: 1.1rem; }
+    .about-text p:last-child { margin-bottom: 0; }
+    .about-text strong { color: var(--ink); font-weight: 500; }
+    .about-sidebar { border-left: 1px solid var(--rule); padding-left: 2rem; }
+    .sb-block { margin-bottom: 1.8rem; }
+    .sb-block:last-child { margin-bottom: 0; }
+    .sb-label {
+      font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--accent-muted); font-weight: 500; margin-bottom: 0.5rem;
+    }
+    .sb-block p, .sb-block li { font-size: 0.84rem; color: var(--ink-light); line-height: 1.65; }
+    .sb-block ul { list-style: none; }
+    .sb-block li::before { content: '— '; color: var(--rule); }
+
+    /* RESEARCH */
+    .research-card {
+      padding: 2rem 0; border-bottom: 1px solid var(--rule);
+      display: grid; grid-template-columns: 2rem 1fr; gap: 1.8rem;
+    }
+    .research-card:first-child { border-top: 1px solid var(--rule); }
+    .r-num { font-family: var(--serif); font-size: 0.85rem; color: var(--rule); font-style: italic; padding-top: 0.1rem; }
+    .r-tag {
+      display: inline-block; font-size: 0.63rem; letter-spacing: 0.12em;
+      text-transform: uppercase; font-weight: 500; color: var(--accent-muted);
+      background: var(--paper-dark); padding: 0.18rem 0.5rem; margin-bottom: 0.65rem;
+    }
+    .r-title {
+      font-family: var(--serif); font-size: 1.12rem; font-weight: 500;
+      line-height: 1.35; color: var(--ink); margin-bottom: 0.55rem;
+    }
+    .r-desc { font-size: 0.87rem; color: var(--ink-light); line-height: 1.72; max-width: 580px; margin-bottom: 0.75rem; }
+    .r-meta { font-size: 0.74rem; color: var(--ink-light); }
+    .r-meta em { color: var(--rule); font-style: normal; }
+
+    /* CV */
+    .cv-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+    .cv-sec-title {
+      font-family: var(--serif); font-size: 0.97rem; font-weight: 500;
+      margin-bottom: 1.4rem; padding-bottom: 0.7rem; border-bottom: 1px solid var(--rule);
+    }
+    .cv-entry { margin-bottom: 1.5rem; }
+    .cv-entry:last-child { margin-bottom: 0; }
+    .cv-year { font-size: 0.7rem; letter-spacing: 0.08em; color: var(--accent-muted); font-weight: 500; margin-bottom: 0.2rem; }
+    .cv-title { font-size: 0.88rem; font-weight: 500; color: var(--ink); line-height: 1.4; }
+    .cv-place { font-size: 0.81rem; color: var(--ink-light); margin-top: 0.1rem; }
+    .cv-note { font-size: 0.76rem; color: var(--ink-light); font-style: italic; margin-top: 0.15rem; }
+    .cv-extra { margin-top: 2.2rem; }
+    .cv-download { margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid var(--rule); }
+
+    /* BLOG */
+    .blog-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem; }
+    .blog-card {
+      background: var(--paper-dark); padding: 1.7rem;
+      border: 1px solid var(--rule); transition: border-color 0.2s; cursor: pointer;
+    }
+    .blog-card:hover { border-color: var(--accent-muted); }
+    .blog-date { font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-muted); margin-bottom: 0.65rem; }
+    .blog-title { font-family: var(--serif); font-size: 0.98rem; font-weight: 500; line-height: 1.4; color: var(--ink); margin-bottom: 0.55rem; }
+    .blog-excerpt { font-size: 0.81rem; color: var(--ink-light); line-height: 1.65; }
+    .blog-soon {
+      grid-column: 1/-1; background: var(--paper-dark);
+      border: 1px dashed var(--rule); padding: 2.5rem; text-align: center;
+    }
+    .blog-soon p { font-family: var(--serif); font-style: italic; color: var(--ink-light); }
+
+    /* CONTACT */
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+    .contact-blurb {
+      font-family: var(--serif); font-style: italic;
+      font-size: 1.3rem; line-height: 1.55; color: var(--ink); margin-top: 1rem;
+    }
+    .c-line {
+      display: flex; align-items: baseline; gap: 0.8rem;
+      padding: 0.85rem 0; border-bottom: 1px solid var(--rule); font-size: 0.87rem;
+    }
+    .c-line:first-child { border-top: 1px solid var(--rule); }
+    .c-lbl {
+      font-size: 0.66rem; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--accent-muted); min-width: 72px; font-weight: 500; flex-shrink: 0;
+    }
+    .c-line a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--rule); transition: border-color 0.2s; }
+    .c-line a:hover { border-color: var(--accent); }
+    .c-line span { color: var(--ink-light); }
+
+    /* FOOTER */
+    footer {
+      max-width: 860px; margin: 0 auto;
+      padding: 2rem 2.5rem 3rem;
+      border-top: 1px solid var(--rule);
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    footer p { font-size: 0.73rem; color: var(--ink-light); }
+
+    @media (max-width: 660px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-photo { display: none; }
+      .about-grid, .cv-cols, .blog-grid, .contact-grid { grid-template-columns: 1fr; }
+      .about-sidebar { border-left: none; border-top: 1px solid var(--rule); padding-left: 0; padding-top: 1.8rem; }
+      .nav-links { gap: 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-name" href="#hero">Ben Westlund</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#research">Research</a></li>
+      <li><a href="#cv">CV</a></li>
+      <li><a href="#blog">Writing</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <div class="wrap" id="hero" style="padding-top:7rem;">
+    <div class="hero-inner">
+      <div>
+        <p class="hero-eyebrow">Chapel Hill, NC</p>
+        <h1>Ben<br>Westlund</h1>
+        <p class="hero-sub">PhD student in <strong>Health Behavior</strong> at the UNC Gillings School of Global Public Health. I study how structural forces shape health — with a focus on opioid harm reduction, reentry health, and mixed methods research.</p>
+        <div class="hero-ctas">
+          <a class="btn" href="#research">View Research</a>
+          <a class="btn btn-ghost" href="#contact">Get in Touch</a>
+        </div>
+      </div>
+      <div class="hero-photo">your<br>photo<br>here</div>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <div class="wrap" id="about">
+    <div class="sec-head">
+      <p class="sec-label">About</p>
+      <h2>Who I am</h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>I'm a first-year PhD student in the <strong>Department of Health Behavior</strong> at UNC Gillings, where I work with Dr. Vivian Go. My research sits at the intersection of structural determinants of health, harm reduction, and community-centered approaches to equity.</p>
+        <p>Before graduate school, I spent two years at the <strong>NC Formerly Incarcerated Transition (NC FIT) Program</strong> at UNC Family Medicine, working directly with individuals navigating reentry — coordinating care, managing Medicaid reinstatement, and building relationships with county stakeholders. That experience shaped how I think about research: as something accountable to the people it concerns.</p>
+        <p>I'm trained in <strong>qualitative and mixed methods</strong>, with growing expertise in implementation science frameworks like CFIR and ERIC. I believe good methods serve the question, not the other way around.</p>
+        <p>I'm a Dorothy Dunn Scholar and a member of the American Public Health Association. I care about making public health research legible — to communities, to practitioners, and to anyone paying attention.</p>
+      </div>
+      <div class="about-sidebar">
+        <div class="sb-block">
+          <p class="sb-label">Research Interests</p>
+          <ul>
+            <li>Opioid harm reduction</li>
+            <li>Reentry health equity</li>
+            <li>Rural health systems</li>
+            <li>Structural determinants</li>
+            <li>Implementation science</li>
+          </ul>
+        </div>
+        <div class="sb-block">
+          <p class="sb-label">Methods</p>
+          <ul>
+            <li>Qualitative (NVivo, Dedoose)</li>
+            <li>Mixed methods integration</li>
+            <li>Survey design &amp; Stata</li>
+            <li>Grounded theory</li>
+          </ul>
+        </div>
+        <div class="sb-block">
+          <p class="sb-label">Advisor</p>
+          <p>Dr. Vivian Go<br>UNC Gillings School of Global Public Health</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RESEARCH -->
+  <div class="wrap" id="research">
+    <div class="sec-head">
+      <p class="sec-label">Research</p>
+      <h2>Projects &amp; Publications</h2>
+      <p class="sec-desc">Current work spanning opioid harm reduction, provider health, and emergency preparedness.</p>
+    </div>
+
+    <div class="research-card">
+      <span class="r-num">01</span>
+      <div>
+        <span class="r-tag">Working Paper</span>
+        <p class="r-title">Emergency Preparedness Planning: Lessons from COVID-19 and the Opioid Crisis in Rural Ohio</p>
+        <p class="r-desc">Examines how rural communities in Ohio navigated the overlapping crises of COVID-19 and the opioid epidemic, identifying structural gaps in emergency preparedness systems and opportunities for harm reduction integration.</p>
+        <p class="r-meta">Westlund, B., et al. <em>&nbsp;&middot;&nbsp;</em> Manuscript in preparation <em>&nbsp;&middot;&nbsp;</em> OHOP Study</p>
+      </div>
+    </div>
+
+    <div class="research-card">
+      <span class="r-num">02</span>
+      <div>
+        <span class="r-tag">Working Paper</span>
+        <p class="r-title">A Socioecological Examination of Provider Alcohol Use in Vietnam</p>
+        <p class="r-desc">Applies a socioecological framework to understand the drivers of alcohol use among healthcare providers in Vietnam, with implications for health system functioning and workforce wellbeing.</p>
+        <p class="r-meta">Westlund, B., et al. <em>&nbsp;&middot;&nbsp;</em> Manuscript in preparation</p>
+      </div>
+    </div>
+
+    <div class="research-card">
+      <span class="r-num">03</span>
+      <div>
+        <span class="r-tag">Honors Thesis &middot; Funded</span>
+        <p class="r-title">The Intersection of the Opioid Crisis and the COVID-19 Pandemic</p>
+        <p class="r-desc">Independent qualitative study examining how the COVID-19 pandemic reshaped pathways into and out of opioid use disorder. Involved in-depth interviews, thematic analysis, and theory-driven interpretation. Awarded the Wake Forest Faculty-Student Facilitation Fund Grant.</p>
+        <p class="r-meta">Wake Forest University, 2022 <em>&nbsp;&middot;&nbsp;</em> $200 Grant Award, Honors &amp; Distinction</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- CV -->
+  <div class="wrap" id="cv">
+    <div class="sec-head">
+      <p class="sec-label">Curriculum Vitae</p>
+      <h2>Background</h2>
+    </div>
+    <div class="cv-cols">
+      <div>
+        <p class="cv-sec-title">Education</p>
+        <div class="cv-entry">
+          <p class="cv-year">2024 &ndash; Expected 2029</p>
+          <p class="cv-title">PhD, Health Behavior</p>
+          <p class="cv-place">UNC Gillings School of Global Public Health</p>
+          <p class="cv-note">Dorothy Dunn Scholar &middot; Advisor: Dr. Vivian Go</p>
+        </div>
+        <div class="cv-entry">
+          <p class="cv-year">2024 &ndash; Expected 2026</p>
+          <p class="cv-title">MSPH, Health Behavior</p>
+          <p class="cv-place">UNC Gillings School of Global Public Health</p>
+          <p class="cv-note">Dorothy Dunn Scholar</p>
+        </div>
+        <div class="cv-entry">
+          <p class="cv-year">2018 &ndash; 2022</p>
+          <p class="cv-title">B.A., Sociology</p>
+          <p class="cv-place">Wake Forest University</p>
+          <p class="cv-note">Cum Laude &middot; Honors &amp; Distinction &middot; Social Determinants of Health</p>
+        </div>
+        <div class="cv-extra">
+          <p class="cv-sec-title">Awards &amp; Fellowships</p>
+          <div class="cv-entry">
+            <p class="cv-year">2024</p>
+            <p class="cv-title">Dorothy Dunn Scholarship</p>
+            <p class="cv-place">UNC Gillings School of Global Public Health</p>
+          </div>
+          <div class="cv-entry">
+            <p class="cv-year">2022</p>
+            <p class="cv-title">Faculty-Student Facilitation Fund Grant</p>
+            <p class="cv-place">Wake Forest University</p>
+            <p class="cv-note">Co-PI with Dr. A. Brewer</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <p class="cv-sec-title">Experience</p>
+        <div class="cv-entry">
+          <p class="cv-year">Aug 2024 &ndash; Present</p>
+          <p class="cv-title">Graduate Research Assistant</p>
+          <p class="cv-place">Dept. of Health Behavior, UNC Gillings</p>
+          <p class="cv-note">OHOP opioid study, Vietnam provider alcohol study, emergency preparedness; qualitative coding, survey development, mixed methods</p>
+        </div>
+        <div class="cv-entry">
+          <p class="cv-year">Aug 2022 &ndash; Jul 2024</p>
+          <p class="cv-title">Research &amp; Program Support Specialist</p>
+          <p class="cv-place">NC FIT Program, UNC Family Medicine</p>
+          <p class="cv-note">Clinical reentry navigation, Medicaid reinstatement, qualitative interviews, county stakeholder partnerships</p>
+        </div>
+        <div class="cv-entry">
+          <p class="cv-year">Aug 2021 &ndash; May 2022</p>
+          <p class="cv-title">Senior Honors Thesis Researcher</p>
+          <p class="cv-place">Wake Forest University</p>
+          <p class="cv-note">Independent qualitative study on COVID-19 and opioid use disorder</p>
+        </div>
+        <div class="cv-entry">
+          <p class="cv-year">May &ndash; Aug 2021</p>
+          <p class="cv-title">Research Assistant</p>
+          <p class="cv-place">Center for Health Policy &amp; Inequalities Research (CHPIR)</p>
+          <p class="cv-note">HRV intervention research, qualitative memos, literature reviews</p>
+        </div>
+        <div class="cv-entry">
+          <p class="cv-year">Aug &ndash; Dec 2021</p>
+          <p class="cv-title">Teaching Assistant</p>
+          <p class="cv-place">Wake Forest University &mdash; Undergraduate Sociology</p>
+        </div>
+      </div>
+    </div>
+    <div class="cv-download">
+      <a class="btn btn-ghost" href="Westlund_Ben_CV.pdf" download>&#8595;&nbsp; Download Full CV (PDF)</a>
+    </div>
+  </div>
+
+  <!-- WRITING -->
+  <div class="wrap" id="blog">
+    <div class="sec-head">
+      <p class="sec-label">Writing</p>
+      <h2>Notes &amp; Essays</h2>
+      <p class="sec-desc">Occasional writing on public health, methods, and things I'm thinking about.</p>
+    </div>
+    <div class="blog-grid">
+      <div class="blog-card">
+        <p class="blog-date">March 2025</p>
+        <p class="blog-title">What two years in a reentry clinic taught me about structural determinants</p>
+        <p class="blog-excerpt">Reflections on navigating Medicaid reinstatement, county systems, and what it means to do research with — not on — a community.</p>
+      </div>
+      <div class="blog-soon">
+        <p>More writing coming soon.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <div class="wrap" id="contact">
+    <div class="contact-grid">
+      <div>
+        <p class="sec-label">Contact</p>
+        <p class="contact-blurb">Happy to connect &mdash; about research, methods, or public health more broadly.</p>
+      </div>
+      <div>
+        <div class="c-line">
+          <span class="c-lbl">Email</span>
+          <a href="mailto:benwestlund@med.unc.edu">benwestlund@med.unc.edu</a>
+        </div>
+        <div class="c-line">
+          <span class="c-lbl">Institution</span>
+          <span>UNC Gillings, Dept. of Health Behavior</span>
+        </div>
+        <div class="c-line">
+          <span class="c-lbl">Location</span>
+          <span>170 Rosenau Hall, Chapel Hill NC 27599</span>
+        </div>
+
+        <div class="c-line">
+          <span class="c-lbl">Affiliations</span>
+          <span>APHA &middot; NC Public Health Association</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Ben Westlund &middot; benwestlund.com</p>
+    <p>UNC Chapel Hill</p>
+  </footer>
+
+</body>
+</html>
