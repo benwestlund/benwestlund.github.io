@@ -63,7 +63,7 @@
 
     /* HERO */
     .hero-inner {
-      display: grid; grid-template-columns: 1fr 160px; gap: 3rem; align-items: end;
+      display: grid; grid-template-columns: 1fr 220px; gap: 3rem; align-items: end;
       padding-top: 4rem;
     }
     .hero-eyebrow {
@@ -85,9 +85,12 @@
     }
     .hero-sub strong { color: var(--ink); font-weight: 500; }
     .hero-photo {
-      width: 150px; height: 190px; background: var(--paper-dark);
-      border: 1px solid var(--rule); display: flex; align-items: center; justify-content: center;
-      font-size: 0.68rem; color: var(--ink-light); text-align: center; line-height: 1.7;
+      width: 260px;
+      height: 340px;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      flex-shrink: 0;
     }
     .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2rem; }
     .btn {
@@ -245,7 +248,7 @@
           <a class="btn btn-ghost" href="#contact">Get in Touch</a>
         </div>
       </div>
-      <img class="hero-photo" src="headshot.jpg" alt="Ben Westlund" style="object-fit:cover;" />
+      <img class="hero-photo" src="headshot.JPG" alt="Ben Westlund" style="object-fit:cover;" />
     </div>
   </div>
 
